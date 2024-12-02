@@ -1,0 +1,54 @@
+//Use "REST Client" and SQLite Extensions for this file.
+
+// Get ALL Country
+POST http://localhost:3310/
+Content-Type: application/json
+
+{
+    "query": "query getAllCountries { getAllCountries { code name emoji } }"
+}
+
+###
+
+// Get Country by code
+POST http://localhost:3310/
+Content-Type: application/json
+
+{
+    "query": "query getCountryByCode($code : String!) { getCountryByCode(code: $code) { name } }",
+    "variables": {
+        "code": "AN"
+    }
+}
+
+###
+
+// Get All Countries by continent
+POST http://localhost:3310/
+Content-Type: application/json
+
+{
+    "query": "query getAllCountriesByContinent($continent : String!) { getAllCountriesByContinent(continent: $continent) { name code emoji } }",
+    "variables": {
+        "continent": "EU"
+    }
+}
+
+
+###
+
+// Post Country
+POST http://localhost:3310/
+Content-Type: application/json
+
+{
+  "query": "mutation AddCountry($datas: CountryInput!) { AddCountry(datas: $datas) { code name emoji continent }}",
+  "variables": {
+    "datas": {
+        "code": "AN",
+        "name": "Antarctica",
+        "emoji": "🇦🇶",
+        "continent": "AN"
+        }
+    }
+}
